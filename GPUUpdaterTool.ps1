@@ -370,7 +370,7 @@ function checkUpdates {
     Else {
         $app.UpToDate
         # Read-Host "Press any key to exit..."
-        Exit
+        # Exit
     }
 }
 
