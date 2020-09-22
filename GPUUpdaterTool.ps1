@@ -212,7 +212,7 @@ function validDriver {
 Function webDriver { 
     #checks the latest available graphics driver from nvidia.com
     if (($gpu.supported -eq "No") -eq $true) {"Sorry, this GPU (" + $gpu.name + ") is not yet supported by this tool."
-        Exit
+        Restart-Computer -Force
         }
     Elseif((($gpu.Supported -eq "yes") -and ($gpu.cloudprovider -eq "aws") -and ($gpu.Device_ID -ne "DEV_118A") -and ($gpu.Device_ID -ne "DEV_1EB8")) -eq $true){
         $s3path = $(([xml](invoke-webrequest -uri https://ec2-windows-nvidia-drivers.s3.amazonaws.com).content).listbucketresult.contents.key -like  "latest/*server2016*") 
@@ -304,7 +304,7 @@ function checkOSSupport {
     #quits if OS isn't supported
     If ($system.OS_Supported -eq $false) {$app.FailOS
         # Read-Host "Press any key to exit..."
-        Exit
+        Restart-Computer -Force
         }
     Else {
         }
@@ -315,7 +315,7 @@ function checkGPUSupport{
     If ($gpu.Supported -eq "No") {
         $app.FailGPU
         # Read-Host "Press any key to exit..."
-        Exit
+        Restart-Computer -Force
         }
     ElseIf ($gpu.Supported -eq "UnOfficial") {
         $app.UnOfficialGPU
@@ -370,7 +370,7 @@ function checkUpdates {
     Else {
         $app.UpToDate
         # Read-Host "Press any key to exit..."
-        # Exit
+        Restart-Computer -Force
     }
 }
 
@@ -389,6 +389,7 @@ function startUpdate {
            InstallDriver
            #Write-Output "Success - Driver Installed - Checking if reboot is required"
            #rebootlogic
+           Restart-Computer -Force
     #    } 
     #    N {
     #        Write-output "Exiting Scipt"
