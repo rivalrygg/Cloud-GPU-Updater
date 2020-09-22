@@ -387,8 +387,8 @@ function startUpdate {
            Write-Output  "Success!"
            Write-Output `n "Installing Driver, this may take up to 10 minutes and will automatically reboot if required"
            InstallDriver
-           Write-Output "Success - Driver Installed - Checking if reboot is required"
-           rebootlogic
+           #Write-Output "Success - Driver Installed - Checking if reboot is required"
+           #rebootlogic
     #    } 
     #    N {
     #        Write-output "Exiting Scipt"
@@ -522,36 +522,36 @@ $system = @{Valid_NVIDIA_Driver = ValidDriver; OS_Version = osVersion; OS_Reboot
 
 function rebootLogic {
     #checks if machine needs to be rebooted, and sets a startup item to set GPU mode to WDDM if required
-    # $system.OS_Reboot_Required = requiresReboot
-    # $gpu.Current_Mode = GPUCurrentMode
-    # if ($system.OS_Reboot_Required -eq $true) {
-    #     if ($GPU.NV_GRID -eq $false) {
+    $system.OS_Reboot_Required = requiresReboot
+    $gpu.Current_Mode = GPUCurrentMode
+    if ($system.OS_Reboot_Required -eq $true) {
+        if ($GPU.NV_GRID -eq $false) {
             Reboot -message $System.OS_Reboot_Reason
-    #         } 
-    #     ElseIf ($GPU.NV_GRID -eq $true) {
-    #         if ($gpu.Current_Mode -eq "TCC") {
-    #             setnvsmi
-    #             setnvsmi-shortcut
-    #             }
-    #         Reboot -message $System.OS_Reboot_Reason
-    #         }
-    #     Else {
-    #         }
-    # }
-    # Else {
-    #     if ($gpu.NV_GRID -eq $true) {
-    #         if ($gpu.Current_Mode -eq "TCC") {
-    #             setnvsmi
-    #             setnvsmi-shortcut
-    #             }
-    #         Reboot -message $System.OS_Reboot_Reason
-    #     }
-    #     ElseIf ($gpu.NV_GRID -eq $false) {
-    #         Reboot -message $System.OS_Reboot_Reason
-    #         }
-    #     Else{
-    #         }
-    # }
+            } 
+        ElseIf ($GPU.NV_GRID -eq $true) {
+            if ($gpu.Current_Mode -eq "TCC") {
+                setnvsmi
+                setnvsmi-shortcut
+                }
+            Reboot -message $System.OS_Reboot_Reason
+            }
+        Else {
+            }
+    }
+    Else {
+        if ($gpu.NV_GRID -eq $true) {
+            if ($gpu.Current_Mode -eq "TCC") {
+                setnvsmi
+                setnvsmi-shortcut
+                }
+            Reboot -message $System.OS_Reboot_Reason
+        }
+        ElseIf ($gpu.NV_GRID -eq $false) {
+            Reboot -message $System.OS_Reboot_Reason
+            }
+        Else{
+            }
+    }
 }
 
 function setnvsmi {
@@ -587,3 +587,6 @@ querygpu
 checkDriverInstalled
 #ConfirmCharges
 checkUpdates
+
+# Always reboot
+Reboot -message 'Graphics drivers updated'
