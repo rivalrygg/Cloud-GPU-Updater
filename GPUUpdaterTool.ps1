@@ -218,7 +218,7 @@ Function webDriver {
         $s3path.split('_')[0].split('/')[1]
         }
     Elseif((($gpu.Supported -eq "unOfficial") -and ($gpu.cloudprovider -eq "aws") -and ($gpu.Device_ID -eq "DEV_1EB8")) -eq $true){
-        G4DNUseSavedCreds GPUUpdateG4Dn
+        #G4DNUseSavedCreds GPUUpdateG4Dn
         G4DN GPUUpdateG4Dn | Out-Null
         $G4WebDriver = G4DN GPUUpdateG4Dn
         $G4WebDriver.tostring().split('-')[1]
