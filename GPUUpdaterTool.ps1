@@ -585,5 +585,5 @@ checkOSSupport
 checkGPUSupport
 querygpu
 checkDriverInstalled
-ConfirmCharges
+#ConfirmCharges
 checkUpdates
