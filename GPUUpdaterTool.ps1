@@ -27,28 +27,28 @@ function osVersion {
     (Get-WmiObject -class Win32_OperatingSystem).Caption
     }
 
-Function G4DNUseSavedCreds {
-    Param (
-    $ProfileName
-    )
-    If ($system.G4DNCredentialCheckAlreadyRan -eq $null) {
-        if ((Get-AWSCredential -ProfileName $ProfileName) -ne $null) {
-            Write-Host "Found saved AWS Access Key for G4DN Driver"
-            Write-Host "Use saved credentials?"
-            $ReadHost = Read-Host "(Y/N)"
-            Switch ($ReadHost) 
-               {
-                   Y {
-                        }
-                   N {
-                        Remove-AWSCredentialProfile -ProfileName $ProfileName -Confirm:$False
-                        }
-               }
+# Function G4DNUseSavedCreds {
+#     Param (
+#     $ProfileName
+#     )
+#     If ($system.G4DNCredentialCheckAlreadyRan -eq $null) {
+#         if ((Get-AWSCredential -ProfileName $ProfileName) -ne $null) {
+#             Write-Host "Found saved AWS Access Key for G4DN Driver"
+#             Write-Host "Use saved credentials?"
+#             $ReadHost = Read-Host "(Y/N)"
+#             Switch ($ReadHost) 
+#                {
+#                    Y {
+#                         }
+#                    N {
+#                         Remove-AWSCredentialProfile -ProfileName $ProfileName -Confirm:$False
+#                         }
+#                }
            
-           }
-    }
-    $system.G4DNCredentialCheckAlreadyRan = 1
-}
+#            }
+#     }
+#     $system.G4DNCredentialCheckAlreadyRan = 1
+# }
 
 Function G4DN {
     param (
@@ -136,20 +136,20 @@ function Reboot {
     param (
     $message)
     if (RequiresReboot){
-        $message
-        "Reboot System?"
-        $ReadHost = Read-Host "(Y/N)"
-        Switch ($ReadHost) 
-           {
-               Y {
+        # $message
+        # "Reboot System?"
+        # $ReadHost = Read-Host "(Y/N)"
+        # Switch ($ReadHost) 
+        #    {
+        #        Y {
                     Restart-Computer -Force
-                    }
-               N {
-                    }
-           }
-        }
-    Else {
-        $message
+    #                 }
+    #            N {
+    #                 }
+    #        }
+    #     }
+    # Else {
+    #     $message
         }
     }
 
@@ -302,7 +302,7 @@ function queryGPU {
 function checkOSSupport {
     #quits if OS isn't supported
     If ($system.OS_Supported -eq $false) {$app.FailOS
-        Read-Host "Press any key to exit..."
+        # Read-Host "Press any key to exit..."
         Exit
         }
     Else {
@@ -313,7 +313,7 @@ function checkGPUSupport{
     #quits if GPU isn't supported
     If ($gpu.Supported -eq "No") {
         $app.FailGPU
-        Read-Host "Press any key to exit..."
+        # Read-Host "Press any key to exit..."
         Exit
         }
     ElseIf ($gpu.Supported -eq "UnOfficial") {
@@ -332,20 +332,20 @@ function checkDriverInstalled {
         }
 }
 
-function confirmcharges {
-    #requests user approve potential cloud run time charges for using the tool
-    $app.confirmcharge
-    $ReadHost = Read-Host "(Y/N)"
-        Switch ($ReadHost) 
-           {
-           Y {
-               }
-           N {
-               Write-Output "The upgrade script will now exit"
-               Exit
-               }
-           }
-}
+# function confirmcharges {
+#     #requests user approve potential cloud run time charges for using the tool
+#     $app.confirmcharge
+#     $ReadHost = Read-Host "(Y/N)"
+#         Switch ($ReadHost) 
+#            {
+#            Y {
+#                }
+#            N {
+#                Write-Output "The upgrade script will now exit"
+#                Exit
+#                }
+#            }
+# }
 
 function prepareEnvironment {
     #prepares working directory
@@ -368,18 +368,18 @@ function checkUpdates {
         }
     Else {
         $app.UpToDate
-        Read-Host "Press any key to exit..."
+        # Read-Host "Press any key to exit..."
         Exit
     }
 }
 
 function startUpdate { 
 #Gives user an option to start the update, and sends messages to the user
-Write-output "Update now?"
-$ReadHost = Read-Host "(Y/N)"
-    Switch ($ReadHost) 
-     { 
-       Y {
+# Write-output "Update now?"
+# $ReadHost = Read-Host "(Y/N)"
+#     Switch ($ReadHost) 
+#      { 
+#        Y {
            Write-Output `n "Downloading Driver"
            prepareEnvironment
            downloaddriver
@@ -388,12 +388,12 @@ $ReadHost = Read-Host "(Y/N)"
            InstallDriver
            Write-Output "Success - Driver Installed - Checking if reboot is required"
            rebootlogic
-       } 
-       N {
-           Write-output "Exiting Scipt"
-           exit
-           } 
-     } 
+    #    } 
+    #    N {
+    #        Write-output "Exiting Scipt"
+    #        exit
+    #        } 
+    #  } 
 }
 
 function DownloadDriver {
