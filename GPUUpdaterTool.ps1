@@ -137,20 +137,20 @@ function Reboot {
     param (
     $message)
     if (RequiresReboot){
-        # $message
-        # "Reboot System?"
-        # $ReadHost = Read-Host "(Y/N)"
-        # Switch ($ReadHost) 
-        #    {
-        #        Y {
+        $message
+        "Reboot System?"
+        $ReadHost = Read-Host "(Y/N)"
+        Switch ($ReadHost) 
+           {
+               Y {
                     Restart-Computer -Force
-    #                 }
-    #            N {
-    #                 }
-    #        }
-    #     }
-    # Else {
-    #     $message
+                    }
+               N {
+                    }
+           }
+        }
+    Else {
+        $message
         }
     }
 
@@ -589,4 +589,4 @@ checkDriverInstalled
 checkUpdates
 
 # Always reboot
-Reboot -message 'Graphics drivers updated'
+Restart-Computer -Force
