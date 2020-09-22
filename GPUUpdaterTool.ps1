@@ -76,7 +76,7 @@ Function G4DN {
 
     $Bucket = "nvidia-gaming"
     $KeyPrefix = "windows/latest"
-    $S3Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1 -ProfileName $profileName
+    $S3Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1# -ProfileName $profileName
     $S3Objects.key | select-string -Pattern '.zip' 
     }
 
@@ -495,29 +495,29 @@ $gpu = @{Device_ID = installedGPUID}
 $system = @{Valid_NVIDIA_Driver = ValidDriver; OS_Version = osVersion; OS_Reboot_Reason = "No Reboot Required" ; OS_Reboot_Required = RequiresReboot; Date = get-date; Path = "C:\ParsecTemp\Drivers"}
 
 
-$app.Parsec = Write-Host -foregroundcolor red "
-                                                           
-                   ((//////                                
-                 #######//////                             
-                 ##########(/////.                         
-                 #############(/////,                      
-                 #################/////*                   
-                 #######/############////.                 
-                 #######/// ##########////                 
-                 #######///    /#######///                 
-                 #######///     #######///                 
-                 #######///     #######///                 
-                 #######////    #######///                 
-                 ########////// #######///                 
-                 ###########////#######///                 
-                   ####################///                 
-                       ################///                 
-                         *#############///                 
-                             ##########///                 
-                                ######(*                   
-                                                           
-                  ~Parsec GPU Updater~
-" 
+# $app.Parsec = Write-Host -foregroundcolor red "
+#                                                            
+#                    ((//////                                
+#                  #######//////                             
+#                  ##########(/////.                         
+#                  #############(/////,                      
+#                  #################/////*                   
+#                  #######/############////.                 
+#                  #######/// ##########////                 
+#                  #######///    /#######///                 
+#                  #######///     #######///                 
+#                  #######///     #######///                 
+#                  #######////    #######///                 
+#                  ########////// #######///                 
+#                  ###########////#######///                 
+#                    ####################///                 
+#                        ################///                 
+#                          *#############///                 
+#                              ##########///                 
+#                                 ######(*                   
+#                                                            
+#                   ~Parsec GPU Updater~
+# "
 
 function rebootLogic {
     #checks if machine needs to be rebooted, and sets a startup item to set GPU mode to WDDM if required
