@@ -54,25 +54,25 @@ Function G4DN {
     param (
     $profileName    
     )
-    if ((Get-AWSCredential -ProfileName $profileName) -ne $null) {
-        }
-    Else {
-        Write-host "The G4dn instance requires a non-public driver, you will need to create or use an existing Access key found here, or create an IAM with permissions to read nvidia-gaming.s3.amazonaws.com"
-        Write-host "https://console.aws.amazon.com/iam/home?/security_credentials#/security_credentials" -BackgroundColor Green -ForegroundColor Black
-        $accesskey = Read-Host "Enter your AWS Access key"
-        $secretkey = Read-Host "Enter your AWS Secret Key"
-        Set-AWSCredentials -AccessKey $accesskey -SecretKey $secretkey -StoreAs $ProfileName
-        Write-Host "Save AWS Access Key? - DO NOT do this if you intend to let others access this machine, or create an AMI that others will be able to create instances from" -BackgroundColor Red -ForegroundColor Black
-        $ReadHost = Read-Host "(Y/N)"
-            Switch ($ReadHost) 
-               {
-                   Y {
-                        }
-                   N {
-                        $System.DoNotSaveAWSCredential = 1
-                        }
-               }
-        }
+    # if ((Get-AWSCredential -ProfileName $profileName) -ne $null) {
+    #     }
+    # Else {
+    #     Write-host "The G4dn instance requires a non-public driver, you will need to create or use an existing Access key found here, or create an IAM with permissions to read nvidia-gaming.s3.amazonaws.com"
+    #     Write-host "https://console.aws.amazon.com/iam/home?/security_credentials#/security_credentials" -BackgroundColor Green -ForegroundColor Black
+    #     $accesskey = Read-Host "Enter your AWS Access key"
+    #     $secretkey = Read-Host "Enter your AWS Secret Key"
+    #     Set-AWSCredentials -AccessKey $accesskey -SecretKey $secretkey -StoreAs $ProfileName
+    #     Write-Host "Save AWS Access Key? - DO NOT do this if you intend to let others access this machine, or create an AMI that others will be able to create instances from" -BackgroundColor Red -ForegroundColor Black
+    #     $ReadHost = Read-Host "(Y/N)"
+    #         Switch ($ReadHost) 
+    #            {
+    #                Y {
+    #                     }
+    #                N {
+    #                     $System.DoNotSaveAWSCredential = 1
+    #                     }
+    #            }
+    #     }
 
     $Bucket = "nvidia-gaming"
     $KeyPrefix = "windows/latest"
