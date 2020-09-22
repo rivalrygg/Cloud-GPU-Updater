@@ -76,7 +76,8 @@ Function G4DN {
 
     $Bucket = "nvidia-gaming"
     $KeyPrefix = "windows/latest"
-    $S3Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1# -ProfileName $profileName
+    #$S3Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1 -ProfileName $profileName
+    $S3Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1
     $S3Objects.key | select-string -Pattern '.zip' 
     }
 
